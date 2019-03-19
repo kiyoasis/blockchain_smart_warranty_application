@@ -1,8 +1,10 @@
-# Decentralized Star Notary Project
+# Blockchain-based Decentralized Smart Warranty Application 
 
 ## Project overview
 
-For this project, you will create a DApp by adding functionality to your smart contract and deploy it on the public testnet. To do so, you'll employ your blockchain identity to secure digital assets on the Ethereum platform using a smart contract. You will get to practice your knowledge of the basics of Solidity.
+In this project, the smart contracts and DApp of decentralized smart warranty application has been created for energy storage supply chain and its warranty management.
+The smart contract is to be deployed on the public testnet Rinkeby. 
+The blockchain identity to secure digital assets is managed on the Ethereum platform using a smart contract using Solidity.
 
 ## Deploy smart contract on Public Test Network (Rinkeby)
 

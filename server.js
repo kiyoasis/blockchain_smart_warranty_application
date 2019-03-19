@@ -1,7 +1,7 @@
 'use strict';
 
 const Hapi = require('hapi');
-const PORT = 8545;
+const PORT = 8080; //8545;
 
 // Create a server with a host and port
 const server = Hapi.server({

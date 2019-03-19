@@ -3,10 +3,11 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Star Notary</title>
+        <title>Blockchain Based Smart Warranty App</title>
         <!-- <link rel="stylesheet" type="text/css" href="./style.css"> -->
 
         <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+
         <style>
             body {
                 background-color:#F0F0F0;
@@ -33,14 +34,221 @@
 
     <body>
         <div class="container">
-            <h1>Star Notary</h1>
+            <h1>Blockchain Based Smart Warranty Application</h1>
+
+            <hr>
+
+            <h2>Battery Provider Section</h2>
+
+            <h3>Produce battery</h3>
+
+            <div class="row">
+                <label class="bold">Battery ID:</label>
+                <input id="battery-name" type="text" value="testBattery">
+            </div>
+ 
+            <div class="row">
+                <label class="bold">Battery Capacity:</label>
+                <input id="battery-capacity" type="text" value="170">
+            </div>
+
+
+            <div class="row">
+                <label class="bold">Battery Max Power:</label>
+                <input id="battery-power" type="text" value="100">
+            </div>
+
+            <div class="row">
+                <label class="bold">Battery Price:</label>
+                <input id="battery-price" type="text" value="5">
+            </div>
+ 
+            <div class="row">
+                <label class="bold">Battery Warranty Period:</label>
+                <input id="battery-warranty-period" type="text" value="3">
+            </div>
+
+            <div class="row">
+                <label class="bold">Current Year:</label>
+                <input id="current-year" type="text" value="2019">
+            </div>
+
+            <button id="produce-button" onclick="produceButtonClicked()">Produce Battery</button>
+            <textarea id="result1" rows = "5" style="width: 80%"></textarea>
+
+
+            <h3>Add Battery for Sale</h3>
+
+            <div class="row">
+                <label class="bold">Battery ID:</label>
+                <input id="battery-token" type="text" value="">
+            </div>
+
+            <button id="add-button" onclick="addButtonClicked()">Add Battery for Sale</button>
+            <textarea id="result3" rows = "1" style="width: 80%"></textarea>
+
+            <h3>Assigned EMS Provider to Battery</h3>
+
+            <div class="row">
+                <label class="bold">Battery ID:</label>
+                <input id="battery-token4" type="text" value="">
+            </div>
+
+            <div class="row">
+                <label class="bold">EMS Provider:</label>
+                <input id="ems-provider" type="text" style="width: 400px" value="0x018c2dabef4904ecbd7118350a0c54dbeae3549a">
+            </div>
+
+
+            <button id="manage-button" onclick="manageButtonClicked()">Manage Battery with EMS Provider</button>
+            <textarea id="result6" rows = "1" style="width: 80%"></textarea>
+
+            <h3>Check Battery's Warranty</h3>
+
+            <div class="row">
+                <label class="bold">Battery ID:</label>
+                <input id="battery-token7" type="text" value="">
+            </div>
+
+            <button id="check-warranty-button" onclick="checkWarrantyButtonClicked()">Check Warranty Conditions</button>
+            <textarea id="result9" rows = "1" style="width: 80%"></textarea>
+
+            <h3>Update Battery's Warranty Status</h3>
+
+            <div class="row">
+                <label class="bold">Battery ID:</label>
+                <input id="battery-token8" type="text" value="">
+            </div>
+
+            <button id="update-warranty-button" onclick="updateWarrantyButtonClicked()">Update Warranty Status</button>
+            <textarea id="result10" rows = "1" style="width: 80%"></textarea>            
+
+            <br> <br>
+            <hr>
+
+            <h2>Battery User Section</h2>
+            
+            <h3>Purchase Battery</h3>
+
+            <div class="row">
+                <label class="bold">Battery ID:</label>
+                <input id="battery-token2" type="text" value="">
+            </div>
+
+            <div class="row">
+                <label class="bold">Bidding Value:</label>
+                <input id="bidding-value" type="text" value="">
+            </div>
+
+            <button id="add-button" onclick="buyButtonClicked()">Purchase Battery</button>
+            <textarea id="result4" rows = "1" style="width: 80%"></textarea>
+
+            <h3>Install Battery</h3>
+
+            <div class="row">
+                <label class="bold">Battery ID:</label>
+                <input id="battery-token3" type="text" value="">
+            </div>
+
+            <button id="install-button" onclick="installButtonClicked()">Install Battery</button>
+            <textarea id="result5" rows = "1" style="width: 80%"></textarea>
+
+            <br> <br>
+            <hr>
+
+            <h2>EMS Provider Section</h2>
+            
+            <h3>Activate Battery with EMS </h3>
+
+            <div class="row">
+                <label class="bold">Battery ID:</label>
+                <input id="battery-token5" type="text" value="">
+            </div>
+
+            <button id="activate-button" onclick="activateButtonClicked()">Activate Battery</button>
+            <textarea id="result7" rows = "1" style="width: 80%"></textarea>
+
+            <h3>Input Battery Usage Data </h3>
+
+            <div class="row">
+                <label class="bold">Battery ID:</label>
+                <input id="battery-token6" type="text" value="">
+            </div>
+
+            <div class="row">
+                <label class="bold">Battery Year:</label>
+                <input id="battery-year" type="text" value="2019">
+            </div>
+
+            <div class="row">
+                <label class="bold">Battery Month:</label>
+                <input id="battery-month" type="text" value="3">
+            </div>
+
+            <div class="row">
+                <label class="bold">Battery Day:</label>
+                <input id="battery-day" type="text" value="18">
+            </div>
+            
+            <div class="row">
+                <label class="bold">Battery Hour:</label>
+                <input id="battery-hour" type="text" value="13">
+            </div>
+
+            <div class="row">
+                <label class="bold">Annual Average SOC:</label>
+                <input id="annual-average-soc" type="text" value="60">
+            </div>
+
+            <div class="row">
+                <label class="bold">Annual Accumulated Discharge Energy (AADE):</label>
+                <input id="battery-aade" type="text" value="1000000">
+            </div>
+
+            <div class="row">
+                <label class="bold">Peak DC Power:</label>
+                <input id="battery-peak-power" type="text" value="40">
+            </div>
+            
+            <div class="row">
+                <label class="bold">Average Daily DC Power:</label>
+                <input id="battery-average-daily-power" type="text" value="20">
+            </div>
+            
+            <button id="get-data-button" onclick="getDataButtonClicked()">Get Battery Usage Data</button>
+            <textarea id="result8" rows = "1" style="width: 80%"></textarea>
+
+            <br><br>
+            <hr>
+
+            <h2>Public Section</h2>
+
+            <h3>Look up battery by token ID</h3>
+            <div class="row">
+                <label class="bold">Token ID:</label>
+                <input id="battery-tokenID" type="text">
+                <button id="Lookup-button" onclick="lookupButtonClicked()">Search Battery</button>
+            </div>
+            <textarea id="result2" rows = "5" style="height: 170px; width: 80%"></textarea>
+
+            <h3>Look up battery warranty violation info by token ID</h3>
+            <div class="row">
+                <label class="bold">Token ID:</label>
+                <input id="battery-violation-tokenID" type="text">
+                <button id="violation-info-button" onclick="lookupViolationButtonClicked()">Search Battery's Warranty Info</button>
+            </div>
+            <textarea id="result-violation" rows = "5" style="height: 130px; width: 80%"></textarea>
+
+
+        </div>
+
+        <!--  
 
             <h2>Create star</h2>
 
             <div class="row">
                 <label class="bold">Star Name:</label>
                 <input id="star-name" type="text">
-                <!-- <label id="star-name"></label> -->
             </div>
             
             <div class="row">
@@ -59,16 +267,7 @@
 
             <button id="claim-button" onclick="claimButtonClicked()">Claim Star</button>
 
-            <textarea id="result1" rows = "5" style="width: 100%"></textarea>
-
-            <h2>Look up star by token ID</h2>
-            <div class="row">
-                <label class="bold">Token ID:</label>
-                <input id="star-tokenID" type="text">
-                <button id="Lookup-button" onclick="lookupButtonClicked()">Search Star</button>
-            </div>
-            <textarea id="result2" rows = "5" style="width: 100%"></textarea>
-        </div>
+        -->
 
         <script>    
          
@@ -85,24 +284,28 @@
             web3.eth.defaultAccount = web3.eth.accounts[0];
 
             // The interface definition for your smart contract (the ABI)
-            var StarNotary = returnStarNotary();
+            var SmartWarranty = returnSmartWarranty();
 
             // Grab the contract at specified deployed address with the interface defined by the ABI
-            var starNotary = StarNotary.at('0x0a3dfc696707b927b58be5E26B771527f0d23617');
+            var smartWarranty = SmartWarranty.at('0x143fe7950139bcd1345721ad8f589b9aca08bcdd');
 
-            // Enable claim button being clicked
-            function claimButtonClicked() {
+            console.log(web3.eth.accounts);
+            console.log(smartWarranty);
 
-                let starName = document.getElementById("star-name").value;
-                let starStory = document.getElementById("star-story").value;
-                let starDec = document.getElementById("star-dec").value;
-                let starMag = document.getElementById("star-mag").value;
-                let starRa = document.getElementById("star-ra").value;
-                console.log(starName);
-                console.log(starStory);
-                console.log(starDec);
-                console.log(starMag);
-                console.log(starRa);
+            // Enable produce button being clicked
+            function produceButtonClicked() {
+
+                let batteryName = document.getElementById("battery-name").value;
+                let batteryCapacity = document.getElementById("battery-capacity").value;
+                let batteryPower = document.getElementById("battery-power").value;
+                let batteryPrice = document.getElementById("battery-price").value;
+                let currentYear = document.getElementById("current-year").value;
+                let batteryWarrantyPeriod = document.getElementById("battery-warranty-period").value;
+                // console.log(starName);
+                // console.log(starStory);
+                // console.log(starDec);
+                // console.log(starMag);
+                // console.log(starRa);
 
                 web3.eth.getAccounts(function(error, accounts) { 
                     if (error) { 
@@ -110,19 +313,234 @@
                         return;
                     }
                     var account = accounts[0];
-                    starNotary.createStar(starName, starStory, starDec, starMag, starRa, {from:account}, 
+                    smartWarranty.produceBattery(batteryName, batteryCapacity, batteryPower, batteryPrice, currentYear, batteryWarrantyPeriod, {from:account, gas:600000}, 
                         function (error, result) {
                             if (!error) {
-                                document.getElementById("result1").value = "star registration complete!";
+                                document.getElementById("result1").value = "battery registration complete!";
                             } else { 
-                                document.getElementById("result1").value = "The star already exists or information you entered is wrong."
+                                document.getElementById("result1").value = "The battery already exists or information you entered is wrong."
                                 console.log(error);
                             }
                     });
-                   
+                
                 })
             }
 
+            // Enable add button being clicked
+            function addButtonClicked() {
+
+                let batteryTokenID = document.getElementById("battery-token").value;
+
+                web3.eth.getAccounts(function(error, accounts) { 
+                    if (error) { 
+                        console.log(error);
+                        return;
+                    }
+                    var account = accounts[0];
+                    smartWarranty.addItem(batteryTokenID, {from:account}, 
+                        function (error, result) {
+                            if (!error) {
+                                document.getElementById("result3").value = "battery " + batteryTokenID + " is now up for sale!";
+                            } else { 
+                                document.getElementById("result3").value = "The battery " + batteryTokenID + " is not added for sale."
+                                console.log(error);
+                            }
+                    });
+                
+                })
+            }
+
+            // Enable buy button being clicked
+            function buyButtonClicked() {
+
+                let batteryTokenID = document.getElementById("battery-token2").value;
+                let price = document.getElementById("bidding-value").value;
+
+                web3.eth.getAccounts(function(error, accounts) { 
+                    if (error) { 
+                        console.log(error);
+                        return;
+                    }
+                    var account = accounts[2];
+
+                    // Get and display battery information
+                    // smartWarranty.showBatteryInfo.call(batteryTokenID, function (error, result) {
+                    //     if (!error) {
+                    //         price = result[3];
+                    //         //console.log(price);
+                    //     } else {
+                    //         document.getElementById('result2').innerText = 'Input tokenID info was wrong.';
+                    //         console.log(error);
+                    //     }
+                    // });
+
+                    smartWarranty.buyItem(batteryTokenID, {from:account, value:price}, 
+                        function (error, result) {
+                            if (!error) {
+                                document.getElementById("result4").value = "battery " + batteryTokenID + " is sold!";
+                            } else { 
+                                document.getElementById("result4").value = "The battery " + batteryTokenID + " is NOT sold."
+                                console.log(error);
+                            }
+                    });
+
+                })
+            }
+
+            // Enable install button being clicked
+            function installButtonClicked() {
+
+                let batteryTokenID = document.getElementById("battery-token3").value;
+
+                web3.eth.getAccounts(function(error, accounts) { 
+                    if (error) { 
+                        console.log(error);
+                        return;
+                    }
+                    var account = accounts[2];
+                    smartWarranty.installBattery(batteryTokenID, {from:account}, 
+                        function (error, result) {
+                            if (!error) {
+                                document.getElementById("result5").value = "battery " + batteryTokenID + " is installed!";
+                            } else { 
+                                document.getElementById("result5").value = "The battery " + batteryTokenID + " is NOT installed."
+                                console.log(error);
+                            }
+                    });
+
+                })
+            }
+
+            // Enable manage button being clicked
+            function manageButtonClicked() {
+
+                let batteryTokenID = document.getElementById("battery-token4").value;
+                let emsProvider = document.getElementById("ems-provider").value;
+
+                web3.eth.getAccounts(function(error, accounts) { 
+                    if (error) { 
+                        console.log(error);
+                        return;
+                    }
+                    var account = accounts[0];
+                    smartWarranty.manageBattery(batteryTokenID, emsProvider, {from:account}, 
+                        function (error, result) {
+                            if (!error) {
+                                document.getElementById("result6").value = "The battery " + batteryTokenID + " is now managed by EMS provider!";
+                            } else { 
+                                document.getElementById("result6").value = "The battery " + batteryTokenID + " is NOT managed."
+                                console.log(error);
+                            }
+                    });
+
+                })
+            }            
+
+            // Enable activate button being clicked
+            function activateButtonClicked() {
+
+                let batteryTokenID = document.getElementById("battery-token5").value;
+
+                web3.eth.getAccounts(function(error, accounts) { 
+                    if (error) { 
+                        console.log(error);
+                        return;
+                    }
+                    var account = accounts[1];
+                    smartWarranty.utilizeBattery(batteryTokenID, {from:account}, 
+                        function (error, result) {
+                            if (!error) {
+                                document.getElementById("result7").value = "The battery " + batteryTokenID + " is now activated by EMS provider!";
+                            } else { 
+                                document.getElementById("result7").value = "The battery " + batteryTokenID + " is NOT activated."
+                                console.log(error);
+                            }
+                    });
+
+                })
+            }
+
+            // Enable getData button being clicked
+            function getDataButtonClicked() {
+
+                let batteryTokenID = document.getElementById("battery-token6").value;
+                let year = document.getElementById("battery-year").value;
+                let month = document.getElementById("battery-month").value;
+                let day = document.getElementById("battery-day").value;
+                let hour = document.getElementById("battery-hour").value;
+                let socValue = document.getElementById("annual-average-soc").value;
+                let aade = document.getElementById("battery-aade").value;
+                let peakDCPower = document.getElementById("battery-peak-power").value;
+                let averageDailyDCPower = document.getElementById("battery-average-daily-power").value;
+
+                web3.eth.getAccounts(function(error, accounts) { 
+                    if (error) { 
+                        console.log(error);
+                        return;
+                    }
+                    var account = accounts[1];
+                    smartWarranty.getUsageData(batteryTokenID, year, month, day, hour, socValue, aade, peakDCPower, averageDailyDCPower, {from:account, gas:500000}, 
+                        function (error, result) {
+                            if (!error) {
+                                document.getElementById("result8").value = "The data of battery " + batteryTokenID + " is reported by EMS provider!";
+                            } else { 
+                                document.getElementById("result8").value = "The data of battery " + batteryTokenID + " is NOT reported."
+                                console.log(error);
+                            }
+                    });
+
+                })
+            }               
+
+            // Enable check warranty button being clicked
+            function checkWarrantyButtonClicked() {
+
+                let batteryTokenID = document.getElementById("battery-token7").value;
+
+                web3.eth.getAccounts(function(error, accounts) { 
+                    if (error) { 
+                        console.log(error);
+                        return;
+                    }
+                    var account = accounts[0];
+                    smartWarranty.checkWarranty(batteryTokenID, {from:account, gas:500000}, 
+                        function (error, result) {
+                            if (!error) {
+                                document.getElementById("result9").value = "The battery " + batteryTokenID + "'s warranty is now checked!";
+                            } else { 
+                                document.getElementById("result9").value = "The battery " + batteryTokenID + "'s warranty is NOT checked."
+                                console.log(error);
+                            }
+                    });
+
+                })
+            }
+
+            // Enable update warranty button being clicked
+            function updateWarrantyButtonClicked() {
+
+                let batteryTokenID = document.getElementById("battery-token8").value;
+
+                web3.eth.getAccounts(function(error, accounts) { 
+                    if (error) { 
+                        console.log(error);
+                        return;
+                    }
+                    var account = accounts[0];
+                    smartWarranty.updateWarranty(batteryTokenID, {from:account, gas:500000}, 
+                        function (error, result) {
+                            if (!error) {
+                                document.getElementById("result10").value = "The battery " + batteryTokenID + "'s warranty is now updated!";
+                            } else { 
+                                document.getElementById("result10").value = "The battery " + batteryTokenID + "'s warranty is NOT updated."
+                                console.log(error);
+                            }
+                    });
+
+                })
+            }
+
+            // Look up battery information
             function lookupButtonClicked() {
                 
                 web3.eth.getAccounts(function(error, accounts) { 
@@ -133,20 +551,35 @@
                     }
 
                     let account = accounts[0];
-                    let tokenId = document.getElementById("star-tokenID").value;
+                    let tokenId = document.getElementById("battery-tokenID").value;
 
                     if (isNaN(tokenId)) {
                         alert("The token ID must be a number.");
                         return;
                     }
 
-                    // Get and display star name
-                    starNotary.tokenIdToStarInfo(tokenId, function (error, result) {
+                    // Get and display battery information
+                    smartWarranty.showBatteryInfo.call(tokenId, function (error, result) {
                         if (!error) {
-                            if (result == ",,,,") {
-                                document.getElementById('result2').innerText = 'No star was found with this tokenID.';
+                            if (result[6] == "Default") {
+                                document.getElementById('result2').innerText = 'No battery was registered with this tokenID.';
                             } else {
-                                document.getElementById('result2').innerText = '[' + result + ']';
+                                const isDataReported = smartWarranty.showBatteryDataReportStatus.call(tokenId);
+                                const isWarrantyAnalyzed = smartWarranty.showBatteryWarrantyAnalyzeStatus.call(tokenId);
+                                document.getElementById('result2').innerHTML = 
+                                    'Battery Name: ' + result[0] + ' \n' +
+                                    'Battery Owner: ' + result[1] + ' \n'+ 
+                                    'Battery EMS: ' + result[2] + ' \n'+ 
+                                    'Battery Price: ' + result[3] + ' \n'+ 
+                                    'Battery Capacity: ' + result[4] + ' \n'+ 
+                                    'Battery Max Power: ' + result[5] + ' \n'+ 
+                                    'Battery State: ' + result[6] + ' \n'+ 
+                                    'Warranty Status: ' + result[7] + ' \n'+ 
+                                    'Data Reported: ' + isDataReported + ' \n'+ 
+                                    'Warranty Checked: ' + isWarrantyAnalyzed + ' \n'+ 
+                                    'Current Year: ' + result[8] + ' \n'+ 
+                                    'Warranty Period: ' + result[9] + ' \n';
+
                             }
                         } else {
                             document.getElementById('result2').innerText = 'Input tokenID info was wrong.';
@@ -155,398 +588,84 @@
                     });                   
                 })
             }
-
             
-            // return StarNotari Smart Contract from ABI
-            function returnStarNotary() {
-                var StarNotary = web3.eth.contract(
+            // Look up warranty violation information of battery
+            function lookupViolationButtonClicked() {
+                
+                web3.eth.getAccounts(function(error, accounts) { 
+
+                    if (error) {
+                        console.log(error);
+                        return;
+                    }
+
+                    let account = accounts[0];
+                    let tokenId = document.getElementById("battery-violation-tokenID").value;
+
+                    if (isNaN(tokenId)) {
+                        alert("The token ID must be a number.");
+                        return;
+                    }
+
+                    // Get and display battery information
+                    smartWarranty.showBatteryViolationInfo.call(tokenId, function (error, result) {
+                        if (!error) {
+                            document.getElementById('result-violation').innerHTML = 
+                                'Battery Name: ' + result[0] + ' \n' +
+                                'Battery Owner: ' + result[1] + ' \n'+ 
+                                'Battery EMS: ' + result[2] + ' \n'+ 
+                                'Annual Average SOC Violated: ' + result[3] + ' \n'+ 
+                                'AADE Violated: ' + result[4] + ' \n'+ 
+                                'Peak DC Power Violated: ' + result[5] + ' \n'+ 
+                                'Average Daily DC Power Violated: ' + result[6];
+                        } else {
+                            document.getElementById('result2').innerText = 'Input tokenID info was wrong.';
+                            console.log(error);
+                        }
+                    });
+                })
+            }
+            
+            // return SmartWarranty Smart Contract from ABI
+            function returnSmartWarranty() {
+                var SmartWarranty = web3.eth.contract(
                     [
                         {
-                            "constant": false,
-                            "inputs": [
-                                {
-                                    "name": "to",
-                                    "type": "address"
-                                },
-                                {
-                                    "name": "tokenId",
-                                    "type": "uint256"
-                                }
-                            ],
-                            "name": "approve",
-                            "outputs": [],
-                            "payable": false,
-                            "stateMutability": "nonpayable",
-                            "type": "function"
-                        },
-                        {
-                            "constant": false,
+                            "constant": true,
                             "inputs": [
                                 {
                                     "name": "_tokenId",
                                     "type": "uint256"
                                 }
                             ],
-                            "name": "buyStar",
-                            "outputs": [],
-                            "payable": true,
-                            "stateMutability": "payable",
-                            "type": "function"
-                        },
-                        {
-                            "constant": false,
-                            "inputs": [
-                                {
-                                    "name": "_name",
-                                    "type": "string"
-                                },
-                                {
-                                    "name": "_story",
-                                    "type": "string"
-                                },
-                                {
-                                    "name": "_dec",
-                                    "type": "string"
-                                },
-                                {
-                                    "name": "_mag",
-                                    "type": "string"
-                                },
-                                {
-                                    "name": "_ra",
-                                    "type": "string"
-                                }
-                            ],
-                            "name": "createStar",
-                            "outputs": [],
-                            "payable": false,
-                            "stateMutability": "nonpayable",
-                            "type": "function"
-                        },
-                        {
-                            "constant": false,
-                            "inputs": [
-                                {
-                                    "name": "_tokenId",
-                                    "type": "uint256"
-                                }
-                            ],
-                            "name": "mint",
-                            "outputs": [],
-                            "payable": false,
-                            "stateMutability": "nonpayable",
-                            "type": "function"
-                        },
-                        {
-                            "constant": false,
-                            "inputs": [
-                                {
-                                    "name": "_tokenId",
-                                    "type": "uint256"
-                                },
-                                {
-                                    "name": "_price",
-                                    "type": "uint256"
-                                }
-                            ],
-                            "name": "putStarUpForSale",
-                            "outputs": [],
-                            "payable": false,
-                            "stateMutability": "nonpayable",
-                            "type": "function"
-                        },
-                        {
-                            "constant": false,
-                            "inputs": [
-                                {
-                                    "name": "from",
-                                    "type": "address"
-                                },
-                                {
-                                    "name": "to",
-                                    "type": "address"
-                                },
-                                {
-                                    "name": "tokenId",
-                                    "type": "uint256"
-                                }
-                            ],
-                            "name": "safeTransferFrom",
-                            "outputs": [],
-                            "payable": false,
-                            "stateMutability": "nonpayable",
-                            "type": "function"
-                        },
-                        {
-                            "constant": false,
-                            "inputs": [
-                                {
-                                    "name": "from",
-                                    "type": "address"
-                                },
-                                {
-                                    "name": "to",
-                                    "type": "address"
-                                },
-                                {
-                                    "name": "tokenId",
-                                    "type": "uint256"
-                                },
-                                {
-                                    "name": "_data",
-                                    "type": "bytes"
-                                }
-                            ],
-                            "name": "safeTransferFrom",
-                            "outputs": [],
-                            "payable": false,
-                            "stateMutability": "nonpayable",
-                            "type": "function"
-                        },
-                        {
-                            "constant": false,
-                            "inputs": [
-                                {
-                                    "name": "to",
-                                    "type": "address"
-                                },
-                                {
-                                    "name": "approved",
-                                    "type": "bool"
-                                }
-                            ],
-                            "name": "setApprovalForAll",
-                            "outputs": [],
-                            "payable": false,
-                            "stateMutability": "nonpayable",
-                            "type": "function"
-                        },
-                        {
-                            "constant": false,
-                            "inputs": [
-                                {
-                                    "name": "from",
-                                    "type": "address"
-                                },
-                                {
-                                    "name": "to",
-                                    "type": "address"
-                                },
-                                {
-                                    "name": "tokenId",
-                                    "type": "uint256"
-                                }
-                            ],
-                            "name": "transferFrom",
-                            "outputs": [],
-                            "payable": false,
-                            "stateMutability": "nonpayable",
-                            "type": "function"
-                        },
-                        {
-                            "anonymous": false,
-                            "inputs": [
-                                {
-                                    "indexed": true,
-                                    "name": "from",
-                                    "type": "address"
-                                },
-                                {
-                                    "indexed": true,
-                                    "name": "to",
-                                    "type": "address"
-                                },
-                                {
-                                    "indexed": true,
-                                    "name": "tokenId",
-                                    "type": "uint256"
-                                }
-                            ],
-                            "name": "Transfer",
-                            "type": "event"
-                        },
-                        {
-                            "anonymous": false,
-                            "inputs": [
-                                {
-                                    "indexed": true,
-                                    "name": "owner",
-                                    "type": "address"
-                                },
-                                {
-                                    "indexed": true,
-                                    "name": "approved",
-                                    "type": "address"
-                                },
-                                {
-                                    "indexed": true,
-                                    "name": "tokenId",
-                                    "type": "uint256"
-                                }
-                            ],
-                            "name": "Approval",
-                            "type": "event"
-                        },
-                        {
-                            "anonymous": false,
-                            "inputs": [
-                                {
-                                    "indexed": true,
-                                    "name": "owner",
-                                    "type": "address"
-                                },
-                                {
-                                    "indexed": true,
-                                    "name": "operator",
-                                    "type": "address"
-                                },
-                                {
-                                    "indexed": false,
-                                    "name": "approved",
-                                    "type": "bool"
-                                }
-                            ],
-                            "name": "ApprovalForAll",
-                            "type": "event"
-                        },
-                        {
-                            "constant": true,
-                            "inputs": [
-                                {
-                                    "name": "owner",
-                                    "type": "address"
-                                }
-                            ],
-                            "name": "balanceOf",
+                            "name": "showBatteryViolationInfo",
                             "outputs": [
                                 {
-                                    "name": "",
-                                    "type": "uint256"
-                                }
-                            ],
-                            "payable": false,
-                            "stateMutability": "view",
-                            "type": "function"
-                        },
-                        {
-                            "constant": true,
-                            "inputs": [
-                                {
-                                    "name": "_dec",
+                                    "name": "batteryID",
                                     "type": "string"
                                 },
-                                {
-                                    "name": "_mag",
-                                    "type": "string"
-                                },
-                                {
-                                    "name": "_ra",
-                                    "type": "string"
-                                }
-                            ],
-                            "name": "checkIfStarExist",
-                            "outputs": [
-                                {
-                                    "name": "flag",
-                                    "type": "bool"
-                                }
-                            ],
-                            "payable": false,
-                            "stateMutability": "view",
-                            "type": "function"
-                        },
-                        {
-                            "constant": true,
-                            "inputs": [
-                                {
-                                    "name": "tokenId",
-                                    "type": "uint256"
-                                }
-                            ],
-                            "name": "getApproved",
-                            "outputs": [
-                                {
-                                    "name": "",
-                                    "type": "address"
-                                }
-                            ],
-                            "payable": false,
-                            "stateMutability": "view",
-                            "type": "function"
-                        },
-                        {
-                            "constant": true,
-                            "inputs": [
                                 {
                                     "name": "owner",
                                     "type": "address"
                                 },
                                 {
-                                    "name": "operator",
+                                    "name": "emsProvider",
                                     "type": "address"
-                                }
-                            ],
-                            "name": "isApprovedForAll",
-                            "outputs": [
+                                },
                                 {
-                                    "name": "",
+                                    "name": "annualAverageSOCViolation",
                                     "type": "bool"
-                                }
-                            ],
-                            "payable": false,
-                            "stateMutability": "view",
-                            "type": "function"
-                        },
-                        {
-                            "constant": true,
-                            "inputs": [
+                                },
                                 {
-                                    "name": "tokenId",
-                                    "type": "uint256"
-                                }
-                            ],
-                            "name": "ownerOf",
-                            "outputs": [
+                                    "name": "annualAccumulatedDischargeEnergyViolation",
+                                    "type": "bool"
+                                },
                                 {
-                                    "name": "",
-                                    "type": "address"
-                                }
-                            ],
-                            "payable": false,
-                            "stateMutability": "view",
-                            "type": "function"
-                        },
-                        {
-                            "constant": true,
-                            "inputs": [
+                                    "name": "peakDCPowerViolation",
+                                    "type": "bool"
+                                },
                                 {
-                                    "name": "",
-                                    "type": "uint256"
-                                }
-                            ],
-                            "name": "starsForSale",
-                            "outputs": [
-                                {
-                                    "name": "",
-                                    "type": "uint256"
-                                }
-                            ],
-                            "payable": false,
-                            "stateMutability": "view",
-                            "type": "function"
-                        },
-                        {
-                            "constant": true,
-                            "inputs": [
-                                {
-                                    "name": "interfaceId",
-                                    "type": "bytes4"
-                                }
-                            ],
-                            "name": "supportsInterface",
-                            "outputs": [
-                                {
-                                    "name": "",
+                                    "name": "dailyAverageDCPowerViolation",
                                     "type": "bool"
                                 }
                             ],
@@ -569,6 +688,86 @@
                             "type": "function"
                         },
                         {
+                            "constant": false,
+                            "inputs": [
+                                {
+                                    "name": "_tokenId",
+                                    "type": "uint256"
+                                }
+                            ],
+                            "name": "installBattery",
+                            "outputs": [],
+                            "payable": false,
+                            "stateMutability": "nonpayable",
+                            "type": "function"
+                        },
+                        {
+                            "constant": false,
+                            "inputs": [
+                                {
+                                    "name": "_tokenId",
+                                    "type": "uint256"
+                                }
+                            ],
+                            "name": "checkDailyAverageDCPowerWarranty",
+                            "outputs": [],
+                            "payable": false,
+                            "stateMutability": "nonpayable",
+                            "type": "function"
+                        },
+                        {
+                            "constant": false,
+                            "inputs": [
+                                {
+                                    "name": "_tokenId",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "name": "_emsProviderAddress",
+                                    "type": "address"
+                                }
+                            ],
+                            "name": "manageBattery",
+                            "outputs": [],
+                            "payable": false,
+                            "stateMutability": "nonpayable",
+                            "type": "function"
+                        },
+                        {
+                            "constant": false,
+                            "inputs": [
+                                {
+                                    "name": "_batteryID",
+                                    "type": "string"
+                                },
+                                {
+                                    "name": "_capacity",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "name": "_power",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "name": "_price",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "name": "_year",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "name": "_warrantyPeriod",
+                                    "type": "uint256"
+                                }
+                            ],
+                            "name": "produceBattery",
+                            "outputs": [],
+                            "payable": false,
+                            "stateMutability": "nonpayable",
+                            "type": "function"
+                        },
+                        {
                             "constant": true,
                             "inputs": [
                                 {
@@ -576,36 +775,481 @@
                                     "type": "uint256"
                                 }
                             ],
-                            "name": "tokenIdToStarInfo",
+                            "name": "showVariables",
                             "outputs": [
                                 {
-                                    "name": "starName",
-                                    "type": "string"
+                                    "name": "Max_Average_Soc",
+                                    "type": "uint256"
                                 },
                                 {
-                                    "name": "starStory",
-                                    "type": "string"
+                                    "name": "Peak_DC_Rack_Power",
+                                    "type": "uint256"
                                 },
                                 {
-                                    "name": "starDec",
-                                    "type": "string"
+                                    "name": "Daily_Avg_Rack_Power",
+                                    "type": "uint256"
                                 },
                                 {
-                                    "name": "starMag",
-                                    "type": "string"
-                                },
-                                {
-                                    "name": "starRa",
-                                    "type": "string"
+                                    "name": "Annual_Accum_Disch_Energy",
+                                    "type": "uint256"
                                 }
                             ],
                             "payable": false,
                             "stateMutability": "view",
                             "type": "function"
+                        },
+                        {
+                            "constant": false,
+                            "inputs": [
+                                {
+                                    "name": "_tokenId",
+                                    "type": "uint256"
+                                }
+                            ],
+                            "name": "updateWarranty",
+                            "outputs": [],
+                            "payable": false,
+                            "stateMutability": "nonpayable",
+                            "type": "function"
+                        },
+                        {
+                            "constant": false,
+                            "inputs": [
+                                {
+                                    "name": "_tokenId",
+                                    "type": "uint256"
+                                }
+                            ],
+                            "name": "checkAnnualAverageSOCWarranty",
+                            "outputs": [],
+                            "payable": false,
+                            "stateMutability": "nonpayable",
+                            "type": "function"
+                        },
+                        {
+                            "constant": false,
+                            "inputs": [
+                                {
+                                    "name": "_tokenId",
+                                    "type": "uint256"
+                                }
+                            ],
+                            "name": "checkPeakDCPowerPerRackWarranty",
+                            "outputs": [],
+                            "payable": false,
+                            "stateMutability": "nonpayable",
+                            "type": "function"
+                        },
+                        {
+                            "constant": true,
+                            "inputs": [
+                                {
+                                    "name": "_tokenId",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "name": "_year",
+                                    "type": "uint256"
+                                }
+                            ],
+                            "name": "showAnnualAverageSOC",
+                            "outputs": [
+                                {
+                                    "name": "TokenID",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "name": "year",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "name": "annualAverageSOC",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "name": "annualAverageSOCViolation",
+                                    "type": "bool"
+                                }
+                            ],
+                            "payable": false,
+                            "stateMutability": "view",
+                            "type": "function"
+                        },
+                        {
+                            "constant": false,
+                            "inputs": [
+                                {
+                                    "name": "_tokenId",
+                                    "type": "uint256"
+                                }
+                            ],
+                            "name": "checkAnnualAccumulatedDischargeEnergyWarranty",
+                            "outputs": [],
+                            "payable": false,
+                            "stateMutability": "nonpayable",
+                            "type": "function"
+                        },
+                        {
+                            "constant": false,
+                            "inputs": [
+                                {
+                                    "name": "_tokenId",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "name": "_address",
+                                    "type": "address"
+                                }
+                            ],
+                            "name": "assignBatteryOwner",
+                            "outputs": [],
+                            "payable": false,
+                            "stateMutability": "nonpayable",
+                            "type": "function"
+                        },
+                        {
+                            "constant": false,
+                            "inputs": [
+                                {
+                                    "name": "_tokenId",
+                                    "type": "uint256"
+                                }
+                            ],
+                            "name": "addItem",
+                            "outputs": [],
+                            "payable": false,
+                            "stateMutability": "nonpayable",
+                            "type": "function"
+                        },
+                        {
+                            "constant": false,
+                            "inputs": [],
+                            "name": "testProduceBatteryAndEMSProvider",
+                            "outputs": [],
+                            "payable": false,
+                            "stateMutability": "nonpayable",
+                            "type": "function"
+                        },
+                        {
+                            "constant": false,
+                            "inputs": [
+                                {
+                                    "name": "_tokenId",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "name": "status",
+                                    "type": "uint8"
+                                }
+                            ],
+                            "name": "modifyWarrantyState",
+                            "outputs": [],
+                            "payable": false,
+                            "stateMutability": "nonpayable",
+                            "type": "function"
+                        },
+                        {
+                            "constant": false,
+                            "inputs": [
+                                {
+                                    "name": "_address",
+                                    "type": "address"
+                                }
+                            ],
+                            "name": "registerTrustedEMSProvider",
+                            "outputs": [],
+                            "payable": false,
+                            "stateMutability": "nonpayable",
+                            "type": "function"
+                        },
+                        {
+                            "constant": false,
+                            "inputs": [
+                                {
+                                    "name": "_tokenId",
+                                    "type": "uint256"
+                                }
+                            ],
+                            "name": "utilizeBattery",
+                            "outputs": [],
+                            "payable": false,
+                            "stateMutability": "nonpayable",
+                            "type": "function"
+                        },
+                        {
+                            "constant": true,
+                            "inputs": [
+                                {
+                                    "name": "_tokenId",
+                                    "type": "uint256"
+                                }
+                            ],
+                            "name": "showBatteryInfo",
+                            "outputs": [
+                                {
+                                    "name": "batteryID",
+                                    "type": "string"
+                                },
+                                {
+                                    "name": "owner",
+                                    "type": "address"
+                                },
+                                {
+                                    "name": "emsProvider",
+                                    "type": "address"
+                                },
+                                {
+                                    "name": "price",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "name": "bolCapacity",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "name": "maxPower",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "name": "stateIs",
+                                    "type": "string"
+                                },
+                                {
+                                    "name": "warrantyStatus",
+                                    "type": "string"
+                                },
+                                {
+                                    "name": "currentYear",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "name": "warrantyPeriod",
+                                    "type": "uint256"
+                                }
+                            ],
+                            "payable": false,
+                            "stateMutability": "view",
+                            "type": "function"
+                        },
+                        {
+                            "constant": false,
+                            "inputs": [
+                                {
+                                    "name": "_tokenId",
+                                    "type": "uint256"
+                                }
+                            ],
+                            "name": "checkWarranty",
+                            "outputs": [],
+                            "payable": false,
+                            "stateMutability": "nonpayable",
+                            "type": "function"
+                        },
+                        {
+                            "constant": false,
+                            "inputs": [
+                                {
+                                    "name": "_tokenId",
+                                    "type": "uint256"
+                                }
+                            ],
+                            "name": "buyItem",
+                            "outputs": [],
+                            "payable": true,
+                            "stateMutability": "payable",
+                            "type": "function"
+                        },
+                        {
+                            "constant": false,
+                            "inputs": [
+                                {
+                                    "name": "_batteryID",
+                                    "type": "string"
+                                },
+                                {
+                                    "name": "batteryOwner",
+                                    "type": "address"
+                                },
+                                {
+                                    "name": "trustedEMSProvider",
+                                    "type": "address"
+                                },
+                                {
+                                    "name": "capacity",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "name": "power",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "name": "year",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "name": "warrantyPeriod",
+                                    "type": "uint256"
+                                }
+                            ],
+                            "name": "registerBatteryInfo",
+                            "outputs": [],
+                            "payable": false,
+                            "stateMutability": "nonpayable",
+                            "type": "function"
+                        },
+                        {
+                            "constant": true,
+                            "inputs": [
+                                {
+                                    "name": "_tokenId",
+                                    "type": "uint256"
+                                }
+                            ],
+                            "name": "showBatteryDataReportStatus",
+                            "outputs": [
+                                {
+                                    "name": "isDataReported",
+                                    "type": "bool"
+                                }
+                            ],
+                            "payable": false,
+                            "stateMutability": "view",
+                            "type": "function"
+                        },
+                        {
+                            "constant": true,
+                            "inputs": [
+                                {
+                                    "name": "_tokenId",
+                                    "type": "uint256"
+                                }
+                            ],
+                            "name": "showBatteryWarrantyAnalyzeStatus",
+                            "outputs": [
+                                {
+                                    "name": "isWarrantyAnalyzed",
+                                    "type": "bool"
+                                }
+                            ],
+                            "payable": false,
+                            "stateMutability": "view",
+                            "type": "function"
+                        },
+                        {
+                            "constant": false,
+                            "inputs": [
+                                {
+                                    "name": "_tokenId",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "name": "_year",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "name": "_month",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "name": "_day",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "name": "_hour",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "name": "_socValue",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "name": "_aade",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "name": "_peakDCPower",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "name": "_averageDailyDCPower",
+                                    "type": "uint256"
+                                }
+                            ],
+                            "name": "getUsageData",
+                            "outputs": [],
+                            "payable": false,
+                            "stateMutability": "nonpayable",
+                            "type": "function"
+                        },
+                        {
+                            "inputs": [],
+                            "payable": false,
+                            "stateMutability": "nonpayable",
+                            "type": "constructor"
+                        },
+                        {
+                            "anonymous": false,
+                            "inputs": [
+                                {
+                                    "indexed": false,
+                                    "name": "tokenId",
+                                    "type": "uint256"
+                                }
+                            ],
+                            "name": "ForSale",
+                            "type": "event"
+                        },
+                        {
+                            "anonymous": false,
+                            "inputs": [
+                                {
+                                    "indexed": false,
+                                    "name": "_tokenId",
+                                    "type": "uint256"
+                                }
+                            ],
+                            "name": "Sold",
+                            "type": "event"
+                        },
+                        {
+                            "anonymous": false,
+                            "inputs": [
+                                {
+                                    "indexed": false,
+                                    "name": "_tokenId",
+                                    "type": "uint256"
+                                }
+                            ],
+                            "name": "Installed",
+                            "type": "event"
+                        },
+                        {
+                            "anonymous": false,
+                            "inputs": [
+                                {
+                                    "indexed": false,
+                                    "name": "_tokenId",
+                                    "type": "uint256"
+                                }
+                            ],
+                            "name": "Managed",
+                            "type": "event"
+                        },
+                        {
+                            "anonymous": false,
+                            "inputs": [
+                                {
+                                    "indexed": false,
+                                    "name": "_tokenId",
+                                    "type": "uint256"
+                                }
+                            ],
+                            "name": "Activated",
+                            "type": "event"
                         }
                     ]
                 );
-                return StarNotary;
+                return SmartWarranty;
             }
         </script>
     </body>
