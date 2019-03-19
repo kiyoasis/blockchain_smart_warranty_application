@@ -25,29 +25,14 @@ Running migration: 1_initial_migration.js
 ## Record of Transactions
 
 ### contract address
-0x0a3dfc696707b927b58be5E26B771527f0d23617
+coming soon ...
 
-https://rinkeby.etherscan.io/address/0x0a3dfc696707b927b58be5e26b771527f0d23617
+https://rinkeby.etherscan.io/address/0x0...
 
 ### contract hash
-0xd8e4dfe96d443ac3a0bf0d5acb6e635687dc984f9addefd7f61aa20c060c71ed
+coming soon
 
-https://rinkeby.etherscan.io/tx/0xd8e4dfe96d443ac3a0bf0d5acb6e635687dc984f9addefd7f61aa20c060c71ed
-
-### createStar() Transaction
-Test Input: ["name", "story", "dec", "mag", "ra" ]
-
-0xa2e1ccd63d2339fd9028bc8f8c898223a793dbe97fd15de0ecc833b5188c74e5
-
-https://rinkeby.etherscan.io/tx/0xa2e1ccd63d2339fd9028bc8f8c898223a793dbe97fd15de0ecc833b5188c74e5
-
-### putStarUpForSale() Transaction
-Test Input: [1 ,2]
-
-0x2b7bb82873c6723efadd94e0f9251792a95afadb71207f5573846ac94f6f1cee
-
-https://rinkeby.etherscan.io/tx/0x2b7bb82873c6723efadd94e0f9251792a95afadb71207f5573846ac94f6f1cee
-
+https://rinkeby.etherscan.io/tx/0x...
 
 
 ## Client Code to interact with Smart Contract
@@ -66,5 +51,5 @@ npm install --save inert
 node server.js
 ```
 
-Access http://localhost:8545 and input necessary information.
+Access http://localhost:8080 and input necessary information.
 
