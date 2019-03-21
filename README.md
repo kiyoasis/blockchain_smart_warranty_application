@@ -7,7 +7,6 @@ The smart contract is to be deployed on the public testnet Rinkeby.
 The blockchain identity to secure digital assets is managed on the Ethereum platform using a smart contract using Solidity.
 
 ## Installing and Testing
-A step by step series of examples that tell you have to get a development env running
 
 Clone this repository:
 
@@ -76,7 +75,7 @@ Running migration: 1_initial_migration.js
   Deploying Migrations...
 
   ... 0x1d659Ed78252399eE98622644478049d76a0275f
-  
+
   ...
 
 ## Steps and Record of Transactions
@@ -139,6 +138,8 @@ https://rinkeby.etherscan.io/tx/0x6db30044a3e373b891225e13760c361b3ce866ceb2317e
 
 ## Client Code to interact with Smart Contract
 
+Change directory: ```cd src```. 
+
 Install following dependencies.
 
 ```
@@ -173,6 +174,3 @@ The DApp User Interface when running should look like...
 * Ganache-cli
 * Truffle
 * Hapi.js
-
-
-
