@@ -1,8 +1,10 @@
-pragma solidity ^0.4.9;
+pragma solidity ^0.4.24;
 // pragma solidity ^0.5.2;
 // pragma experimental ABIEncoderV2;
 
 import "../batteryaccesscontrol/BatteryUserRole.sol";
+import "../batteryaccesscontrol/BatteryProviderRole.sol";
+import "../batteryaccesscontrol/EMSProviderRole.sol";
 
 //------------------------------------------------------------------------------
 // Decentralized EMS platform using Smart Contract for Warranty Application for 
@@ -18,7 +20,7 @@ import "../batteryaccesscontrol/BatteryUserRole.sol";
 //  - Daily average rack power
 //  - Substantial portion of all half-cycles
 //------------------------------------------------------------------------------
-contract SupplyChain {
+contract SupplyChain is BatteryUserRole, BatteryProviderRole, EMSProviderRole {
     
     // Battery and Warranty Provider (e.g. LG Chem)
     address batteryProvider;
@@ -53,20 +55,6 @@ contract SupplyChain {
     enum State {DEFAULT, PRODUCED, FORSALE, SOLD, INSTALLED, MANAGED, ACTIVE, RETURNED}
     enum WarrantyStatus {UNDER_WARRANTY, OUT_OF_WARRANTY}
 
-    // Owner's Information
-    struct OwnerInfo {
-        string ownerID;
-        string firstName;
-        string lastName;
-        string companyName;
-    }
-    
-    // EMS Provider information: need to be approved by the battery provider
-    struct EnergyManagementSystemProvider {
-        address emsProvider;
-        bool isApproved;
-    }
-    
     // Battery Information
     struct BatteryInfo {
         
@@ -188,20 +176,20 @@ contract SupplyChain {
     event Activated(uint _tokenId);
     
     // Currently the modifier conditions are minimized for easier testing
-    modifier onlyProvider {
-        require(msg.sender == batteryProvider);
-        _;
-    }
+    // modifier onlyBatteryProvider {
+    //     require(msg.sender == batteryProvider);
+    //     _;
+    // }
     
-    modifier onlyEMSProvider(address _emsProvider) {
-        require(msg.sender == _emsProvider);
-        _;
-    }
+    // modifier onlyEMSProvider(address _emsProvider) {
+    //     require(msg.sender == _emsProvider);
+    //     _;
+    // }
     
-    modifier onlyOwner(address _owner) {
-        require(msg.sender == _owner);
-        _;
-    }
+    // modifier onlyOwner(address _owner) {
+    //     require(msg.sender == _owner);
+    //     _;
+    // }
     
     // Define a modifier that verifies the Caller
     modifier verifyCaller (address _address) {
@@ -278,12 +266,12 @@ contract SupplyChain {
         
     }
     
-    function registerTrustedEMSProvider(address _address) public onlyProvider {
+    function registerTrustedEMSProvider(address _address) public onlyBatteryProvider(batteryProvider) {
         trustedEMSProvider = _address;
     }
     
     // Registering battery information
-    function registerBatteryInfo(string _batteryID, address batteryOwner, address trustedEMSProvider, uint capacity, uint power, uint year, uint warrantyPeriod) public onlyProvider {
+    function registerBatteryInfo(string _batteryID, address batteryOwner, address trustedEMSProvider, uint capacity, uint power, uint year, uint warrantyPeriod) public onlyBatteryProvider(batteryProvider) {
         
         require(tokenId != 0);
         
@@ -307,7 +295,7 @@ contract SupplyChain {
 
     
     // Registering battery information
-    function produceBattery(string _batteryID, uint _capacity, uint _power, uint _price, uint _year, uint _warrantyPeriod) public onlyProvider {
+    function produceBattery(string _batteryID, uint _capacity, uint _power, uint _price, uint _year, uint _warrantyPeriod) public onlyBatteryProvider(batteryProvider) {
         
         require(tokenId != 0);
         
@@ -326,7 +314,7 @@ contract SupplyChain {
         tokenId ++;
     }
     
-    function addItem(uint _tokenId) public onlyProvider {
+    function addItem(uint _tokenId) public onlyBatteryProvider(batteryProvider) {
         require(tokenIdToBatteryInfo[_tokenId].state == State.PRODUCED);
         
         // Emit the appropriate event
@@ -357,7 +345,7 @@ contract SupplyChain {
     
     // Used only when the battery is transacted not using ether coins
     // In this case, this function is called only by battery provider after confirming the payment
-    function assignBatteryOwner(uint _tokenId, address _address) forSale(_tokenId) onlyProvider public {
+    function assignBatteryOwner(uint _tokenId, address _address) forSale(_tokenId) onlyBatteryProvider(batteryProvider) public {
 
         // Update Buyer
         tokenIdToBatteryInfo[_tokenId].owner = _address;
@@ -370,7 +358,7 @@ contract SupplyChain {
     }
     
     // Once the battery is sold, the onwner needs to install the battery
-    function installBattery(uint _tokenId) sold(_tokenId) onlyOwner(tokenIdToBatteryInfo[_tokenId].owner) public {
+    function installBattery(uint _tokenId) sold(_tokenId) onlyBatteryUser(tokenIdToBatteryInfo[_tokenId].owner) public {
 
         // Update State
         tokenIdToBatteryInfo[_tokenId].state = State.INSTALLED;
@@ -380,7 +368,7 @@ contract SupplyChain {
     }
     
     
-    function manageBattery(uint _tokenId, address _emsProviderAddress) installed(_tokenId) onlyProvider public {
+    function manageBattery(uint _tokenId, address _emsProviderAddress) installed(_tokenId) onlyBatteryProvider(batteryProvider) public {
         
         // If needed, verify if _addrress is recorded as the trustedEMSProvider
         
@@ -428,7 +416,7 @@ contract SupplyChain {
     }
     
     // Once the warranty information is provided, the battery provider will check if the conditions are met
-    function checkWarranty(uint _tokenId) activated(_tokenId) onlyProvider public {
+    function checkWarranty(uint _tokenId) activated(_tokenId) onlyBatteryProvider(batteryProvider) public {
         require(tokenIdToBatteryInfo[_tokenId].isDataReported == true);
         
         checkAnnualAverageSOCWarranty(_tokenId);
@@ -440,7 +428,7 @@ contract SupplyChain {
     }
     
     // Checking Annual Average SOC Warranty
-    function checkAnnualAverageSOCWarranty(uint _tokenId) activated(_tokenId) onlyProvider public {
+    function checkAnnualAverageSOCWarranty(uint _tokenId) activated(_tokenId) onlyBatteryProvider(batteryProvider) public {
         require(tokenIdToBatteryInfo[_tokenId].isDataReported == true);
 
         bool violationFlag = false;
@@ -455,7 +443,7 @@ contract SupplyChain {
     }
     
     // Checking Annual Accumulated Discharge Energy Warranty
-    function checkAnnualAccumulatedDischargeEnergyWarranty(uint _tokenId) activated(_tokenId) onlyProvider public {
+    function checkAnnualAccumulatedDischargeEnergyWarranty(uint _tokenId) activated(_tokenId) onlyBatteryProvider(batteryProvider) public {
 
         require(tokenIdToBatteryInfo[_tokenId].isDataReported == true);
         
@@ -470,7 +458,7 @@ contract SupplyChain {
     }
     
     // Checking Peak DC Power per Rack Warranty
-    function checkPeakDCPowerPerRackWarranty(uint _tokenId) activated(_tokenId) onlyProvider public {
+    function checkPeakDCPowerPerRackWarranty(uint _tokenId) activated(_tokenId) onlyBatteryProvider(batteryProvider) public {
         
         require(tokenIdToBatteryInfo[_tokenId].isDataReported == true);
         
@@ -485,7 +473,7 @@ contract SupplyChain {
     }
     
     // Checking Daily Average DC Power Warranty
-    function checkDailyAverageDCPowerWarranty(uint _tokenId) activated(_tokenId) onlyProvider public {
+    function checkDailyAverageDCPowerWarranty(uint _tokenId) activated(_tokenId) onlyBatteryProvider(batteryProvider) public {
         
         require(tokenIdToBatteryInfo[_tokenId].isDataReported == true);
 
@@ -500,7 +488,7 @@ contract SupplyChain {
     }
     
     // Update warranty status if any violation is detected
-    function updateWarranty(uint _tokenId) activated(_tokenId) onlyProvider public {
+    function updateWarranty(uint _tokenId) activated(_tokenId) onlyBatteryProvider(batteryProvider) public {
         
         require(tokenIdToBatteryInfo[_tokenId].isWarrantyAnalyzed == true);
         
@@ -529,7 +517,7 @@ contract SupplyChain {
     }
     
     //TODO need modifier
-    function modifyWarrantyState(uint _tokenId, WarrantyStatus status) onlyProvider public {
+    function modifyWarrantyState(uint _tokenId, WarrantyStatus status) onlyBatteryProvider(batteryProvider) public {
         
         BatteryInfo storage bInfo = tokenIdToBatteryInfo[_tokenId];
         bInfo.warrantyStatus = status;
