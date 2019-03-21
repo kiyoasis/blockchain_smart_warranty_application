@@ -8,6 +8,18 @@ The blockchain identity to secure digital assets is managed on the Ethereum plat
 
 ## Deploy smart contract on Public Test Network (Rinkeby)
 
+# Install it from npm
+```
+npm install -g truffle-export-abi
+```
+
+# Run it in your truffle project
+```
+truffle-export-abi
+```
+You will see, ABI extracted and output file wrote to: build/ABI.json, so that you can check the ABI there.
+
+
 ```
 truffle migrate --reset --compile-all —-network rinkeby
 ```
