@@ -260,7 +260,7 @@
             var SmartWarranty = returnSmartWarranty();
 
             // Grab the contract at specified deployed address with the interface defined by the ABI
-            var smartWarranty = SmartWarranty.at('0xD3f53Eb6Afa3f3c68107adEb4732Dd7aC918D987');
+            var smartWarranty = SmartWarranty.at('0x1d659Ed78252399eE98622644478049d76a0275f');
 
             console.log(web3.eth.accounts);
             console.log(smartWarranty);
@@ -526,14 +526,30 @@
                         return;
                     }
 
+                    // Get data reported status to display battery information
+                    let isDataReported = false;
+                    smartWarranty.showBatteryDataReportStatus.call(tokenId, function (error, result) {
+                        if (!error) {
+                            isDataReported = result;
+                        }
+                    });
+                    
+                    // Get warranty analysis status to display battery information
+                    let isWarrantyAnalyzed = false;
+                    smartWarranty.showBatteryWarrantyAnalyzeStatus.call(tokenId, function (error, result) {
+                        if (!error) {
+                            isWarrantyAnalyzed = result;
+                        }
+                    });
+
                     // Get and display battery information
                     smartWarranty.showBatteryInfo.call(tokenId, function (error, result) {
                         if (!error) {
                             if (result[6] == "Default") {
                                 document.getElementById('result2').innerText = 'No battery was registered with this tokenID.';
                             } else {
-                                const isDataReported = smartWarranty.showBatteryDataReportStatus.call(tokenId);
-                                const isWarrantyAnalyzed = smartWarranty.showBatteryWarrantyAnalyzeStatus.call(tokenId);
+                                //const isDataReported = smartWarranty.showBatteryDataReportStatus.call(tokenId);
+                                //const isWarrantyAnalyzed = smartWarranty.showBatteryWarrantyAnalyzeStatus.call(tokenId);
                                 document.getElementById('result2').innerHTML = 
                                     'Battery Name: ' + result[0] + ' \n' +
                                     'Battery Owner: ' + result[1] + ' \n'+ 
