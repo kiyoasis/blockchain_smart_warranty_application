@@ -51,7 +51,7 @@ Test smart contracts:
 truffle test
 ```
 
-All 10 tests should pass.
+All 9 tests should pass.
 
 ![truffle test](images/truffle_test.png)
 
