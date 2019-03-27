@@ -31,8 +31,12 @@ Your terminal should look something like this:
 
 ![truffle test](images/ganache-cli.png)
 
-In a separate terminal window, Compile smart contracts:
+If you have not installed truffle, just install it first.
+```
+npm install -g truffle 
+```
 
+In a separate terminal window, compile smart contracts:
 ```
 truffle compile
 ```
@@ -140,16 +144,13 @@ https://rinkeby.etherscan.io/tx/0x6db30044a3e373b891225e13760c361b3ce866ceb2317e
 
 Change directory: ```cd src```. 
 
-Install following dependencies.
+Install hapi and inert just by:
 
 ```
-npm install --save hapi
+npm install
 ```
 
-```
-npm install --save inert
-```
-
+Then, run the server by:
 ```
 node server.js
 ```
