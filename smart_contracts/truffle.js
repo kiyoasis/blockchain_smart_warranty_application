@@ -16,6 +16,11 @@ var mnemonic = 'spirit supply whale amount human item harsh scare congress disco
 var endpoint = 'https://rinkeby.infura.io/v3/cb2b1d810efb480da18c306da6b9455c'
 
 module.exports = {
+    compilers: {
+        solc: {
+            version: "0.4.24"
+        }
+    },
     networks: { 
         development: {
             host: '127.0.0.1',
